@@ -1,0 +1,40 @@
+<form>
+  <h4>select camera</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Camera</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="food">
+      <mat-option *ngFor="let camera of cameras" [value]="camera.value">
+        {{camera.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<form>
+  <h4>select rover</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Rover</mat-label>
+    <mat-select [(ngModel)]="selectedValueRover" name="food">
+      <mat-option *ngFor="let rover of rovers" [value]="rover.value">
+        {{rover.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<div *ngIf="selectedValue!='' || selectedValueRover!='' ">
+<div class="block" *ngFor="let image of OnlyfilterImage">
+  <mat-card mat-card class="example-card">
+    <img mat-card-image [src]="image.img_src" alt="">
+  </mat-card>
+</div>
+</div>
+
+<div *ngIf="selectedValue === '' && selectedValueRover === '' ">
+  <div class="block" *ngFor="let image of tenImage">
+    <mat-card mat-card class="example-card">
+      <img mat-card-image [src]="image.img_src" alt="">
+    </mat-card>
+  </div>
+</div>
+
+
+<button  (click)="loadMore()">Load More</button>
