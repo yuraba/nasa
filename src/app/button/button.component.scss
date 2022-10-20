@@ -3,3 +3,34 @@ img {
   width: 400px;
   height: 400px;
 }
+.buttonLoad{
+  margin-right: 10px;
+  position: relative;
+  background-color: #4CAF50;
+  font-size: 28px;
+  color: #FFFFFF;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  cursor: pointer;
+}
+.buttonLoad:after{
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+.buttonLoad:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}

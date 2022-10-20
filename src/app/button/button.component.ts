@@ -38,11 +38,7 @@ export class ButtonComponent implements OnInit {
     {value: 'Opportunity', viewValue: 'Opportunity'},
     {value: 'Spirit', viewValue: 'Spirit'},
   ];
-
-
-
   constructor( private loadService: LoadService,) { }
-
   ngOnInit(): void {
     this.loadArticle()
   }
@@ -50,7 +46,6 @@ export class ButtonComponent implements OnInit {
   loadArticle(): void {
 
     this.loadService.get().pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
-        console.log(data.photos);
         this.adminImage = data.photos;
       },
       error => {
@@ -70,15 +65,6 @@ export class ButtonComponent implements OnInit {
       }
       this.OnlyfilterImage.push(this.filterImage[i+this.currentIndex]);
     }
-    this.filterImage = [];
-    this.filterImage = this.adminImage.filter(t => t.rover.name === this.selectedValueRover);
-    for(let i = 0; i<10; i++) {
-      if(this.filterImage[i] === undefined){
-        continue
-      }
-      this.OnlyfilterImage.push(this.filterImage[i+this.currentIndex]);
-    }
-    console.log(this.OnlyfilterImage)
     this.currentIndex+=10;
   }
 
