@@ -51,9 +51,10 @@ export class ButtonComponent implements OnInit {
       error => {
         console.log(error);
       })
-
-
   }
+
+  
+
   loadMore(){
     for(let i = 0; i<10; i++) {
       this.tenImage.push(this.adminImage[i+this.currentIndex]);

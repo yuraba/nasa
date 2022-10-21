@@ -1,12 +1,14 @@
+$base-color: #4CAF50;
+$desk-size: 400px;
+
 img {
-  border-radius: 8px;
-  width: 400px;
-  height: 400px;
+  border-radius: 23px;
+  width: $desk-size;
+  height: $desk-size;
 }
 .buttonLoad{
-  margin-right: 10px;
   position: relative;
-  background-color: #4CAF50;
+  background-color: $base-color;
   font-size: 28px;
   color: #FFFFFF;
   padding: 20px;
@@ -23,7 +25,6 @@ img {
   position: absolute;
   padding-top: 300%;
   padding-left: 350%;
-  margin-left: -20px !important;
   margin-top: -120%;
   opacity: 0;
   transition: all 0.8s
@@ -33,4 +34,34 @@ img {
   margin: 0;
   opacity: 1;
   transition: 0s
+}
+.block{
+  margin-top: 25px;
+  margin-left: 37%;
+  width: $desk-size;
+  height: $desk-size;
+
+}
+@media screen and (max-width: 480px){
+  img {
+    border-radius: 23px;
+    width: 250px;
+    height: 250px;
+  }
+  .buttonLoad{
+    width: 125px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 720px){
+  img {
+    border-radius: 23px;
+    width: 300px;
+    height: 300px;
+  }
+  .buttonLoad{
+    width: 175px;
+    font-size: 21px;
+  }
 }
