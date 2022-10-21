@@ -30,6 +30,7 @@ export class ButtonComponent implements OnInit {
   public sol = '1';
   public check = false;
   public isLoadMore = true;
+  public noContent = false;
 
   cameras: Camera[] = [
     {value: 'Front Hazard Avoidance Camera', viewValue: 'Front Hazard Avoidance Camera'},
@@ -57,6 +58,8 @@ export class ButtonComponent implements OnInit {
     this.loadService.get(this.selectedValueRover.toLowerCase(), this.sol).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         console.log(data);
         this.adminImage = data.photos;
+        this.check = true;
+        this.loadMore()
       },
       error => {
         console.log(error);
@@ -69,21 +72,26 @@ export class ButtonComponent implements OnInit {
     console.log(this.adminImage);
 
     for(let i = 0; i<10; i++) {
+      console.log(this.selectedValue!='' || this.selectedValueRover!='')
       if (this.adminImage[i+this.currentIndex]){
         this.tenImage.push(this.adminImage[i+this.currentIndex]);
       }
-
-
     }
+    console.log(this.selectedValue)
     this.filterImage = this.adminImage.filter(t => t.camera.full_name === this.selectedValue);
     for(let i = 0; i<10; i++) {
-      if(this.filterImage[i] === undefined){
-        continue
+      if(this.filterImage[i+this.currentIndex]){
+        this.OnlyfilterImage.push(this.filterImage[i+this.currentIndex]);
       }
-      this.OnlyfilterImage.push(this.filterImage[i+this.currentIndex]);
+      else{
+        this.isLoadMore = false
+      }
     }
     this.currentIndex+=10;
-    console.log(this.filterImage);
+    if (!this.OnlyfilterImage.length){
+      this.noContent = true
+    }
+    console.log(this.OnlyfilterImage)
   }
 
 }
