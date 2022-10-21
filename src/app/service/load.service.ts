@@ -12,8 +12,8 @@ export class LoadService {
 
   }
 
-  get(): Observable<any> {
-    return this.http.get<any>(this.url);
+  get(rover: string, sol: string): Observable<any> {
+    return this.http.get<any>(`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&api_key=fjNrCMhApDWlE0aoP8ebpDqdUMbF3jeAEnr1sBsk`);
   }
 
 

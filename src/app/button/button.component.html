@@ -9,6 +9,7 @@
     </mat-select>
   </mat-form-field>
 </form>
+
 <form>
   <h4>select rover</h4>
   <mat-form-field appearance="fill">
@@ -20,6 +21,12 @@
     </mat-select>
   </mat-form-field>
 </form>
+<h4>input sol</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Sol</mat-label>
+  <input [(ngModel)]="sol" matInput>
+</mat-form-field>
+
 <div *ngIf="selectedValue!='' || selectedValueRover!='' ">
 <div class="block" *ngFor="let image of OnlyfilterImage">
   <mat-card mat-card class="example-card">
@@ -28,7 +35,9 @@
 </div>
 </div>
 
-<div *ngIf="selectedValue === '' && selectedValueRover === '' ">
+
+
+<div>
   <div class="block" *ngFor="let image of tenImage">
     <mat-card mat-card class="example-card">
       <img mat-card-image [src]="image.img_src" alt="">
@@ -36,4 +45,5 @@
   </div>
 </div>
 
-<button class="buttonLoad" (click)="loadMore()">Load More</button>
+<button *ngIf="check && isLoadMore" class="buttonLoad" (click)="loadMore()">Load More</button>
+<button *ngIf="!check" class="buttonLoad" (click)="loadArticle()">Load Photo</button>

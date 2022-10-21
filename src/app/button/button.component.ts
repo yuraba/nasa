@@ -25,13 +25,21 @@ export class ButtonComponent implements OnInit {
 
   public currentIndex = 0;
   private readonly unsubscribe$ = new Subject<void>();
-  selectedValue: string = '';
-  selectedValueRover: string = '';
+  selectedValue: string = 'Mast Camera';
+  selectedValueRover: string = 'curiosity';
+  public sol = '1';
+  public check = false;
+  public isLoadMore = true;
 
   cameras: Camera[] = [
     {value: 'Front Hazard Avoidance Camera', viewValue: 'Front Hazard Avoidance Camera'},
     {value: 'Mast Camera', viewValue: 'Mast Camera'},
     {value: 'Rear Hazard Avoidance Camera', viewValue: 'Rear Hazard Avoidance Camera'},
+    {value: 'Panoramic Camera', viewValue: 'Panoramic'},
+    {value: 'Chemistry and Camera Complex', viewValue: 'Chemistry and Camera Complex'},
+    {value: 'Mars Hand Lens Imager', viewValue: 'Mars Hand Lens Imager'},
+    {value: 'Mars Descent Imager', viewValue: 'Navigation Camera'},
+    {value: 'Miniature Thermal Emission Spectrometer (Mini-TES)', viewValue: 'Miniature Thermal Emission Spectrometer (Mini-TES)'}
   ];
   rovers: Rover[] = [
     {value: 'Curiosity', viewValue: 'Curiosity'},
@@ -40,12 +48,14 @@ export class ButtonComponent implements OnInit {
   ];
   constructor( private loadService: LoadService,) { }
   ngOnInit(): void {
-    this.loadArticle()
+    // this.loadArticle()
   }
 
   loadArticle(): void {
-
-    this.loadService.get().pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
+    this.check = true;
+    console.log(this.selectedValueRover.toLowerCase());
+    this.loadService.get(this.selectedValueRover.toLowerCase(), this.sol).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
+        console.log(data);
         this.adminImage = data.photos;
       },
       error => {
@@ -53,11 +63,17 @@ export class ButtonComponent implements OnInit {
       })
   }
 
-  
+
 
   loadMore(){
+    console.log(this.adminImage);
+
     for(let i = 0; i<10; i++) {
-      this.tenImage.push(this.adminImage[i+this.currentIndex]);
+      if (this.adminImage[i+this.currentIndex]){
+        this.tenImage.push(this.adminImage[i+this.currentIndex]);
+      }
+
+
     }
     this.filterImage = this.adminImage.filter(t => t.camera.full_name === this.selectedValue);
     for(let i = 0; i<10; i++) {
@@ -67,6 +83,7 @@ export class ButtonComponent implements OnInit {
       this.OnlyfilterImage.push(this.filterImage[i+this.currentIndex]);
     }
     this.currentIndex+=10;
+    console.log(this.filterImage);
   }
 
 }
